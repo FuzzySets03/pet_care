@@ -438,10 +438,21 @@ function Contact() {
           text="可以电话确认当天空位，也可以在页面提交预约信息。"
           dark
         />
-        <div className="grid grid-cols-3 gap-[18px] max-[900px]:grid-cols-1">
-          <ContactCard title="门店地址" text="上海市静安区宠爱路 88 号 1 层" />
-          <ContactCard title="预约电话" text={<>021-6688-9052<br />微信：BubbleTailPet</>} />
-          <ContactCard title="贴心提示" text="首次到店请携带疫苗记录，皮肤敏感或近期用药请提前告知。" />
+        <div className="grid gap-[18px]">
+          <div className="grid grid-cols-3 gap-[18px] max-[900px]:grid-cols-1">
+            <ContactCard title="门店地址" text="上海市静安区宠爱路 88 号 1 层" />
+            <ContactCard title="预约电话" text={<>021-6688-9052<br />微信：BubbleTailPet</>} />
+            <ContactCard title="贴心提示" text="首次到店请携带疫苗记录，皮肤敏感或近期用药请提前告知。" />
+          </div>
+          <div className="overflow-hidden rounded-lg border border-white/15 bg-white/[0.06] shadow-[0_18px_45px_rgba(0,0,0,0.22)]">
+            <iframe
+              className="block aspect-[16/9] min-h-[360px] w-full border-0 max-[560px]:aspect-auto max-[560px]:min-h-[320px]"
+              title="泡泡尾巴宠物洗护店地图"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=121.4388%2C31.2194%2C121.4648%2C31.2394&layer=mapnik&marker=31.2294%2C121.4518"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
         </div>
       </div>
     </section>
