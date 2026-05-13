@@ -100,6 +100,18 @@ const features: FeatureItem[] = [
   },
 ];
 
+function getTomorrowMorningArrivalTime() {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  tomorrow.setHours(9, 30, 0, 0);
+
+  const year = tomorrow.getFullYear();
+  const month = String(tomorrow.getMonth() + 1).padStart(2, "0");
+  const day = String(tomorrow.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}T09:30`;
+}
+
 const reviews = [
   {
     text: "我家狗狗很怕吹风，这里会中途停下来安抚，洗完也没有炸毛，香味很自然。",
@@ -195,6 +207,7 @@ function Header() {
 
 function Hero() {
   const [status, setStatus] = useState("");
+  const [defaultArrivalTime] = useState(getTomorrowMorningArrivalTime);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -258,7 +271,7 @@ function Hero() {
               </select>
             </FormField>
             <FormField label="期望到店时间" htmlFor="arrivalTime">
-              <input className="min-h-11 w-full rounded-lg border border-[var(--line)] bg-white px-3 py-2.5 outline-none focus:border-[var(--leaf)] focus:shadow-[0_0_0_4px_rgba(47,143,123,0.12)]" id="arrivalTime" name="arrivalTime" type="datetime-local" required />
+              <input className="min-h-11 w-full rounded-lg border border-[var(--line)] bg-white px-3 py-2.5 outline-none focus:border-[var(--leaf)] focus:shadow-[0_0_0_4px_rgba(47,143,123,0.12)]" id="arrivalTime" name="arrivalTime" type="datetime-local" defaultValue={defaultArrivalTime} required />
             </FormField>
             <FormField label="联系电话" htmlFor="phone">
               <input className="min-h-11 w-full rounded-lg border border-[var(--line)] bg-white px-3 py-2.5 outline-none focus:border-[var(--leaf)] focus:shadow-[0_0_0_4px_rgba(47,143,123,0.12)]" id="phone" name="phone" type="tel" placeholder="请输入手机号" required />
