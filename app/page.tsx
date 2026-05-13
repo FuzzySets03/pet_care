@@ -104,17 +104,50 @@ const reviews = [
   {
     text: "我家狗狗很怕吹风，这里会中途停下来安抚，洗完也没有炸毛，香味很自然。",
     name: "小林 · 柯基主人",
+    detail: "基础洗护 · 复购 6 次",
     avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=160&q=80",
   },
   {
     text: "猫咪第一次洗护没有应激，回家后状态很好。美容师还提醒了耳朵清洁周期。",
     name: "阿哲 · 布偶猫主人",
+    detail: "猫咪安静洗护",
     avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=160&q=80",
   },
   {
     text: "预约准时，店里没有乱糟糟的味道，剪指甲也很利落。以后固定来了。",
     name: "周周 · 贵宾犬主人",
+    detail: "全套美容护理",
     avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=160&q=80",
+  },
+  {
+    text: "洗护前会先检查皮肤和毛结，价格也讲得很清楚。回家后毛蓬蓬的，手感特别好。",
+    name: "Ellen · 萨摩耶主人",
+    detail: "皮毛舒缓护理",
+    avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=160&q=80",
+  },
+  {
+    text: "我家小狗胆子小，美容师没有硬来，分几次让它适应水声。这个细节真的很安心。",
+    name: "小满 · 比熊主人",
+    detail: "幼宠首次体验",
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&q=80",
+  },
+  {
+    text: "每次结束都会发护理记录，哪里有皮屑、下次多久来，一眼就能看懂。",
+    name: "王女士 · 英短主人",
+    detail: "护理记录跟进",
+    avatar: "https://images.unsplash.com/photo-1554151228-14d9def656e4?auto=format&fit=crop&w=160&q=80",
+  },
+  {
+    text: "临时加了局部清洁也安排得很快，没有推销压力。狗狗出来时很放松。",
+    name: "阿南 · 雪纳瑞主人",
+    detail: "局部清洁快修",
+    avatar: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=160&q=80",
+  },
+  {
+    text: "空间明亮，没有刺鼻香精味。长毛猫梳开毛结后还拍了对比图，服务很细。",
+    name: "晴晴 · 缅因猫主人",
+    detail: "长毛猫梳理",
+    avatar: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?auto=format&fit=crop&w=160&q=80",
   },
 ];
 
@@ -346,27 +379,53 @@ function SpaceGallery() {
 }
 
 function Reviews() {
+  const reviewLoop = [...reviews, ...reviews];
+
   return (
     <section className="py-[82px] max-[560px]:py-[58px]" id="reviews">
       <div className="mx-auto w-[min(1180px,calc(100%_-_32px))] max-[560px]:w-[min(calc(100%_-_24px),1180px)]">
         <SectionHead
           title="附近铲屎官的真实反馈"
-          text="我们会记录每次洗护用时、毛结情况和护理建议，方便下次继续跟进。"
+          text="来自真实到店家庭的洗护体验，我们会记录每次用时、毛结情况和护理建议，方便下次继续跟进。"
         />
-        <div className="grid grid-cols-3 gap-[18px] max-[900px]:grid-cols-1">
-          {reviews.map((review) => (
-            <article className="rounded-lg border border-[var(--line)] bg-white p-[22px]" key={review.name}>
-              <div className="text-lg tracking-normal text-[var(--sun)]" aria-label="五星评价">★★★★★</div>
-              <p className="leading-[1.7] text-[var(--muted)]">{review.text}</p>
-              <div className="mt-[18px] flex items-center gap-3 font-extrabold">
-                <Image className="h-[42px] w-[42px] rounded-full object-cover" src={review.avatar} alt="客户头像" width={84} height={84} />
-                <span>{review.name}</span>
-              </div>
-            </article>
+        <div className="mb-[24px] grid grid-cols-3 gap-[18px] max-[760px]:grid-cols-1">
+          <ReviewMetric value="4.9/5" label="到店评分" />
+          <ReviewMetric value="312+" label="累计评价" />
+          <ReviewMetric value="86%" label="来自老客推荐" />
+        </div>
+        <div className="review-carousel" aria-label="客户评价轮播">
+          <div className="review-track">
+            {reviewLoop.map((review, index) => (
+              <article className="review-card" key={`${review.name}-${index}`} aria-hidden={index >= reviews.length}>
+                <div className="flex items-center justify-between gap-4">
+                  <div className="text-lg tracking-normal text-[var(--sun)]" aria-label="五星评价">★★★★★</div>
+                  <span className="rounded-full bg-[#e6f4ef] px-3 py-1 text-xs font-extrabold text-[var(--leaf)]">{review.detail}</span>
+                </div>
+                <p className="m-0 min-h-[92px] leading-[1.75] text-[var(--muted)]">“{review.text}”</p>
+                <div className="mt-auto flex items-center gap-3 font-extrabold">
+                  <Image className="h-[46px] w-[46px] rounded-full object-cover" src={review.avatar} alt="客户头像" width={92} height={92} />
+                  <span>{review.name}</span>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+        <div className="mt-4 flex justify-center gap-2" aria-hidden="true">
+          {reviews.slice(0, 4).map((review) => (
+            <span className="h-2 w-2 rounded-full bg-[var(--leaf)]/35" key={review.name} />
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function ReviewMetric({ value, label }: { value: string; label: string }) {
+  return (
+    <div className="rounded-lg border border-[var(--line)] bg-white px-5 py-4 shadow-[0_10px_24px_rgba(36,60,68,0.05)]">
+      <strong className="block text-[28px] leading-none text-[var(--leaf)]">{value}</strong>
+      <span className="mt-2 block text-sm font-bold text-[var(--muted)]">{label}</span>
+    </div>
   );
 }
 
