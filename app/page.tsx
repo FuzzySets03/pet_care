@@ -168,7 +168,9 @@ function Hero() {
     const form = event.currentTarget;
     const formData = new FormData(form);
     const petName = String(formData.get("petName") || "").trim() || "宝贝";
-    setStatus(`${petName}的预约已记录，我们会尽快联系确认时间。`);
+    const arrivalTime = String(formData.get("arrivalTime") || "").trim();
+    const arrivalText = arrivalTime ? `，期望到店时间：${arrivalTime.replace("T", " ")}` : "";
+    setStatus(`${petName}的预约已记录${arrivalText}，我们会尽快联系确认。`);
     form.reset();
   }
 
@@ -221,6 +223,9 @@ function Hero() {
                 <option>全套美容护理</option>
                 <option>皮毛舒缓护理</option>
               </select>
+            </FormField>
+            <FormField label="期望到店时间" htmlFor="arrivalTime">
+              <input className="min-h-11 w-full rounded-lg border border-[var(--line)] bg-white px-3 py-2.5 outline-none focus:border-[var(--leaf)] focus:shadow-[0_0_0_4px_rgba(47,143,123,0.12)]" id="arrivalTime" name="arrivalTime" type="datetime-local" required />
             </FormField>
             <FormField label="联系电话" htmlFor="phone">
               <input className="min-h-11 w-full rounded-lg border border-[var(--line)] bg-white px-3 py-2.5 outline-none focus:border-[var(--leaf)] focus:shadow-[0_0_0_4px_rgba(47,143,123,0.12)]" id="phone" name="phone" type="tel" placeholder="请输入手机号" required />
